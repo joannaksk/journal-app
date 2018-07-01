@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        journal_app {
+            keyAlias 'journal-app'
+            keyPassword 'journal'
+            storeFile file('C:/Users/jkisaakye/googleAfricaScholarship/googleAfricaScholarship.jks')
+            storePassword 'gas123'
+        }
+    }
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
@@ -14,6 +22,8 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.journal_app
+
         }
     }
 }
@@ -22,27 +32,19 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.1'
     implementation 'com.google.firebase:firebase-auth:16.0.1'
     implementation 'com.google.firebase:firebase-core:16.0.1'
-
     implementation 'com.firebaseui:firebase-ui-database:4.0.0'
-
     // Google Sign In SDK (only required for Google Sign In)
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
-
     //add Recycler view dependencies; must match SDK version
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-
     //FAB dependencies
     implementation 'com.android.support:design:27.1.1'
-
-    implementation "android.arch.persistence.room:runtime:1.1.1"
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
-
-    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
-
     //Testing
     // Instrumentation dependencies use androidTestCompile
     // (as opposed to testCompile for local unit tests run in the JVM)
